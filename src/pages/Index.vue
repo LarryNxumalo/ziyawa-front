@@ -9,7 +9,6 @@
               <v-tab>Item Three</v-tab>
             </v-tabs>
             <v-card
-            class="mx-auto"
             max-width="400"
             >
               <v-img
