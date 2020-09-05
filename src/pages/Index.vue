@@ -4,13 +4,15 @@
         <v-row>
           <v-col sm="6" offset-sm="3">
             <v-tabs v-model="tab" grow>
-              <v-tab>Item One</v-tab>
-              <v-tab>Item Two</v-tab>
-              <v-tab>Item Three</v-tab>
+              <v-tab>All Events</v-tab>
+              <v-tab>Music Events</v-tab>
+              <v-tab>Coding Events</v-tab>
             </v-tabs>
-            <v-card
-            v-for="edge in $page.events.edges" :key="edge.node.id"
-            max-width="400"
+            <v-row class="justify-space-around">
+              <v-card
+            v-for="edge in events" :key="edge.node.id"
+            width="290"
+            class="mt-5"
             >
 
               <v-img
@@ -28,17 +30,12 @@
                   color="orange"
                   text
                 >
-                  Share
-                </v-btn>
-
-                <v-btn
-                  color="orange"
-                  text
-                >
-                  Explore
+                  Read More
                 </v-btn>
               </v-card-actions><!--end of v-card-actions-->
             </v-card><!--end-of-v-card-->
+            </v-row>
+
           </v-col>
         </v-row>
     </v-container>
@@ -54,9 +51,12 @@
         id
         title
         description
-        duration
         price
+        duration
         date
+        thumbnail
+        image
+        category
       }
     }
   }
@@ -70,24 +70,30 @@ export default {
   },
   data(){
     return {
-      tab:0
+      tab:0,
+      events: []
     }
+  },
+  mounted(){
+    this.events = this.$page.events.edges //setting events to be equal to the events object
   },
   watch: {
     tab(val) {
-      if(this.tab = 0){
+      if(this.tab === 0){
         this.showAllEvents()
       } else {
-        this.showEventsByType()
+        this.showEventsByType(val)
       }
     }
   },
   methods: {
     showAllEvents(){
-      console.log('all')
+        this.events = this.$page.events.edges
     },
-    showEventsByType(){
-      console.log('type')
+    showEventsByType(val){
+        this.events = this.$page.events.edges.filter((edge) => {
+          return edge.node.category === val;
+        })
     }
   }
 }

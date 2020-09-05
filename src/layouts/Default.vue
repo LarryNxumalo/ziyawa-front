@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app>
-      <v-toolbar-title>E-vents</v-toolbar-title>
+      <v-toolbar-title>Ziyawa</v-toolbar-title>
           <v-text-field
             label="Search"
             placeholder="Search"
