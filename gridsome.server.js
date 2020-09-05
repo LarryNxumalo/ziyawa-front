@@ -24,12 +24,14 @@ module.exports = function (api) {
     const { data } = await axios.get('http://localhost:1337/events/')
 
     const collection = actions.addCollection({ // Object - array of objects or table - in GraphQL
-      typeName: 'Event'
+      typeName: 'Event',
+      path: '/events/:id'
     })
 
     for (const event of data) {
       collection.addNode({ //array.push addNode is similar to array.push in js array manipulation functions
         id: event.id,
+        path: '/events/' + event.id,
         title: event.title,
         description: event.description,
         price: event.price,
